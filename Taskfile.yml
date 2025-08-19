@@ -1,0 +1,42 @@
+version: '3'
+tasks:
+  install:
+    desc: "Create venv and install dev dependencies"
+    cmds:
+      - python3 -m venv .venv
+      - . .venv/bin/activate && python -m pip install --upgrade pip
+      - . .venv/bin/activate && pip install -e '.[dev]'
+    silent: false
+
+  lint:
+    desc: "Run ruff lint checks"
+    cmds:
+      - . .venv/bin/activate && ruff check .
+    silent: false
+
+  lint-fix:
+    desc: "Run ruff fix/format on the codebase"
+    cmds:
+      - . .venv/bin/activate && ruff format .
+    silent: false
+
+  typecheck:
+    desc: "Run mypy type checks"
+    cmds:
+      - . .venv/bin/activate && mypy .
+    silent: false
+
+  test:
+    desc: "Run pytest"
+    cmds:
+      - . .venv/bin/activate && pytest -q
+    silent: false
+
+  checks:
+    desc: "Run install, lint, typecheck and tests (CI-ish)"
+    cmds:
+      - task: install
+      - task: lint
+      - task: typecheck
+      - task: test
+    silent: false

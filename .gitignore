@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyi
+*.pyz
+*.pyz
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Test / coverage
+.coverage
+htmlcov/
